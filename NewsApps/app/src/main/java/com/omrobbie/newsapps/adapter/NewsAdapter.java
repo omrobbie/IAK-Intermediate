@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.omrobbie.newsapps.R;
 import com.omrobbie.newsapps.model.ArticlesItem;
 
@@ -58,11 +59,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             super(itemView);
 
             // TODO: (6) Binding komponen yang sudah di deklarasikan sebelumnya
-            ButterKnife.bind(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         // TODO: (7) Buat method untuk binding data
         public void bind(ArticlesItem articlesItem) {
+            Glide.with(ivNewsPhoto.getContext())
+                    .load(articlesItem.getUrlToImage())
+                    .into(ivNewsPhoto);
             tvNewsTitle.setText(articlesItem.getTitle());
             tvNewsDescription.setText(articlesItem.getDescription());
         }

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 10; i++) {
             ArticlesItem dummyNews = new ArticlesItem();
+            dummyNews.setUrlToImage("http://images.pcworld.com/images/article/2012/05/android_superman-11359833.jpg");
             dummyNews.setTitle(getString(R.string.lorem_title));
             dummyNews.setDescription(getString(R.string.lorem_description));
             dummyList.add(dummyNews);
