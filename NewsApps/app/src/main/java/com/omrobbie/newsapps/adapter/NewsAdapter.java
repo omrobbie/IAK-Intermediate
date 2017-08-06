@@ -30,7 +30,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         // TODO: (2) Mebuat Inflater
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_news, parent);
+                .inflate(R.layout.item_news, parent, false);
 
         return new NewsViewHolder(view);
     }
