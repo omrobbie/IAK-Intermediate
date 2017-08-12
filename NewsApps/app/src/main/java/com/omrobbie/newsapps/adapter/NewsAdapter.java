@@ -47,6 +47,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         return mNewsList.size();
     }
 
+    // TODO: (18) Buat method setData untuk menyimpan data ke List
+    public void setData(List<ArticlesItem> data) {
+        this.mNewsList.clear();
+        mNewsList.addAll(data);
+        notifyDataSetChanged();
+    }
+
     // TODO: (1) Membuat class untuk View Holder di dalam adapter (ini pertama kali yang harus dilakukan, dan diketik manual)
     static class NewsViewHolder extends RecyclerView.ViewHolder {
 
