@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapterAPI.setItemNewsClickListener(new NewsClickListener() {
             @Override
             public void onItemNewsClicked(ArticlesItem articlesItem) {
-                Toast.makeText(MainActivity.this, articlesItem.getTitle(), Toast.LENGTH_SHORT).show();
+                DetailActivity.start(MainActivity.this, articlesItem.toJson());
             }
         });
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<APIResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Call failed : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "API Response Call Failure!", Toast.LENGTH_SHORT).show();
             }
         });
     }

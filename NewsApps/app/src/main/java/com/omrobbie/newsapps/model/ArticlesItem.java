@@ -1,5 +1,6 @@
 package com.omrobbie.newsapps.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 public class ArticlesItem{
@@ -84,5 +85,14 @@ public class ArticlesItem{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    // TODO: (24) Membuat parsing data intent jadi otomatis, tanpa memperdulikan key dari putExtra
+    public String toJson() {
+        return new Gson().toJson(this);
+    }
+
+    public ArticlesItem fromJson(String newsJson) {
+        return new Gson().fromJson(newsJson, ArticlesItem.class);
     }
 }
