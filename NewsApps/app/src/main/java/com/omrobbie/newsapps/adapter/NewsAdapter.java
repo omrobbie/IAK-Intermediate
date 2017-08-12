@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     // TODO: (3) Setelah membuat model, deklarasikan dengan List
     List<ArticlesItem> mNewsList;
 
+    // TODO: (21) Deklarasikan interface NewsClickListener
+    NewsClickListener mNewsClickListener;
+
     // TODO: (4) Generate consrtructor
     public NewsAdapter(List<ArticlesItem> mNewsList) {
         this.mNewsList = mNewsList;
@@ -37,9 +41,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     @Override
-    public void onBindViewHolder(NewsAdapter.NewsViewHolder holder, int position) {
+    public void onBindViewHolder(NewsAdapter.NewsViewHolder holder, final int position) {
         ArticlesItem news = mNewsList.get(position);
         holder.bind(news);
+        holder.btnReadMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mNewsClickListener != null) {
+                    mNewsClickListener.onItemNewsClicked(
+                            mNewsList.get(position)
+                    );
+                }
+            }
+        });
     }
 
     @Override
@@ -54,6 +68,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         notifyDataSetChanged();
     }
 
+    // TODO: (22) Buat method untuk memanggil click listener
+    public void setItemNewsClickListener(NewsClickListener newsClickListener) {
+        if (newsClickListener != null) {
+            mNewsClickListener = newsClickListener;
+        }
+    }
+
     // TODO: (1) Membuat class untuk View Holder di dalam adapter (ini pertama kali yang harus dilakukan, dan diketik manual)
     static class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -61,6 +82,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         @BindView(R.id.ivNewsPhoto) ImageView ivNewsPhoto;
         @BindView(R.id.tvNewsTitle) TextView tvNewsTitle;
         @BindView(R.id.tvNewsDescription) TextView tvNewsDescription;
+        @BindView(R.id.btnReadMore) Button btnReadMore;
 
         public NewsViewHolder(View itemView) {
             super(itemView);

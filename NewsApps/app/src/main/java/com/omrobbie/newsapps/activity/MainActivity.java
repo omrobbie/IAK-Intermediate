@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.omrobbie.newsapps.BuildConfig;
 import com.omrobbie.newsapps.R;
 import com.omrobbie.newsapps.adapter.NewsAdapter;
+import com.omrobbie.newsapps.adapter.NewsClickListener;
 import com.omrobbie.newsapps.model.APIResponse;
 import com.omrobbie.newsapps.model.ArticlesItem;
 import com.omrobbie.newsapps.rest.APIClient;
@@ -56,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: (17) Set adapter dan recycler view
         mAdapterAPI = new NewsAdapter(mListArticle);
+
+        // TODO: (23) Panggil method click listener
+        mAdapterAPI.setItemNewsClickListener(new NewsClickListener() {
+            @Override
+            public void onItemNewsClicked(ArticlesItem articlesItem) {
+                Toast.makeText(MainActivity.this, articlesItem.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         mRecyclerView.setAdapter(mAdapterAPI);
 
         getData();
