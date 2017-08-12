@@ -15,7 +15,8 @@
             android:id="@+id/ivNewsPhoto"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/tvNewsTitle"
@@ -39,6 +40,17 @@
             android:paddingLeft="@dimen/padding_title"
             android:paddingRight="@dimen/padding_title"
             android:text="Description" />
+
+        <!-- TODO: (19) Tambahkan tombol untuk read more -->
+        <Button
+            android:id="@+id/btnReadMore"
+            style="?attr/buttonBarPositiveButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:text="@string/read_more"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
