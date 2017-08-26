@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.omrobbie.newsapps.R;
+import com.omrobbie.newsapps.database.DBOpenHelper;
 import com.omrobbie.newsapps.model.ArticlesItem;
 
 import butterknife.BindView;
@@ -44,6 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     private ArticlesItem articlesItem;
 
     private boolean mIsFav = false;
+    private DBOpenHelper dbOpenHelper;
 
     public static void start(Context context, ArticlesItem articlesItem) {
         Intent intent = new Intent(context, DetailActivity.class);
@@ -57,19 +59,21 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
+        // TODO: (41) Deklarasikan helper
+        dbOpenHelper = new DBOpenHelper(getApplicationContext());
+
         // TODO: (27) Tampilkan data
-        if (getIntent().hasExtra(KEY_EXTRA_NEWS)) {
-            articlesItem = getIntent().getParcelableExtra(KEY_EXTRA_NEWS);
-            Toast.makeText(this, articlesItem.getTitle(), Toast.LENGTH_SHORT).show();
+        if (!getIntent().hasExtra(KEY_EXTRA_NEWS)) finish();
 
-            setupWebView();
-            webView.loadUrl(articlesItem.getUrl());
-            progressBar.setMax(100);
+        articlesItem = getIntent().getParcelableExtra(KEY_EXTRA_NEWS);
+        Toast.makeText(this, articlesItem.getTitle(), Toast.LENGTH_SHORT).show();
 
-            setupActionBar();
-            setupFAB();
+        setupWebView();
+        webView.loadUrl(articlesItem.getUrl());
+        progressBar.setMax(100);
 
-        } else finish();
+        setupActionBar();
+        setupFAB();
     }
 
     // TODO: (29) Buatkan fungsi untuk menampilkan web view
@@ -125,7 +129,9 @@ public class DetailActivity extends AppCompatActivity {
         fabFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIsFav = !mIsFav;
+
+                // TODO: (42) Panggil simpan perubahan data
+                mIsFav = dbOpenHelper.saveNewsItem(articlesItem);
                 fabFavorite.setImageResource(mIsFav ? R.drawable.ic_action_fav : R.drawable.ic_action_fav_border);
             }
         });
