@@ -43,6 +43,8 @@ public class DetailActivity extends AppCompatActivity {
     FloatingActionButton fabFavorite;
     private ArticlesItem articlesItem;
 
+    private boolean mIsFav = false;
+
     public static void start(Context context, ArticlesItem articlesItem) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(KEY_EXTRA_NEWS, articlesItem);
@@ -115,7 +117,16 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 Log.d(TAG, "onScrollChange: " + scrollY);
-                fabFavorite.setVisibility(scrollY > 0 ? View.GONE : View.VISIBLE);
+                fabFavorite.setVisibility(scrollY > oldScrollY ? View.GONE : View.VISIBLE);
+            }
+        });
+
+        // TODO: (36) Tambahkan listener untuk FAB
+        fabFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIsFav = !mIsFav;
+                fabFavorite.setImageResource(mIsFav ? R.drawable.ic_action_fav : R.drawable.ic_action_fav_border);
             }
         });
     }
