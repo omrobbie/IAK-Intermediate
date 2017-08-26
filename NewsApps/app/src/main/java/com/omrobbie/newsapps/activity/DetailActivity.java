@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +35,12 @@ public class DetailActivity extends AppCompatActivity {
     ProgressBar progressBar;
     @BindView(R.id.webView)
     WebView webView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.nestedScrollView)
+    NestedScrollView nestedScrollView;
+    @BindView(R.id.fabFavorite)
+    FloatingActionButton fabFavorite;
     private ArticlesItem articlesItem;
 
     public static void start(Context context, ArticlesItem articlesItem) {
@@ -56,6 +65,8 @@ public class DetailActivity extends AppCompatActivity {
             progressBar.setMax(100);
 
             setupActionBar();
+            setupFAB();
+
         } else finish();
     }
 
@@ -64,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
         webView.clearCache(true);
         webView.clearHistory();
         webView.setHorizontalScrollBarEnabled(false);
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 Log.d(TAG, "onProgressChanged: " + String.valueOf(newProgress));
@@ -78,6 +89,10 @@ public class DetailActivity extends AppCompatActivity {
 
     // TODO: (30) Buatkan fungsi untuk merubah tampilan action bar
     private void setupActionBar() {
+
+        // TODO: (34) Set support untuk action bar
+        setSupportActionBar(toolbar);
+
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar == null) return;
@@ -92,6 +107,17 @@ public class DetailActivity extends AppCompatActivity {
         // TODO: (31) Tambahkan icon di action bar
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_action_close);
         actionBar.setHomeAsUpIndicator(drawable);
+    }
+
+    // TODO: (35) Buatkan fungsi untuk merespon tombol floating action button
+    private void setupFAB() {
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Log.d(TAG, "onScrollChange: " + scrollY);
+                fabFavorite.setVisibility(scrollY > 0 ? View.GONE : View.VISIBLE);
+            }
+        });
     }
 
     // TODO: (33) Atifkan ketika tombol back/home ditekan
