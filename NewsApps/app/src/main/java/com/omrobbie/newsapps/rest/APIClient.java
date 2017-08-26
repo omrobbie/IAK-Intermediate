@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 // TODO: (11) Buat file APIClient
 public class APIClient {
 
-    private static final String BASE_URL = "https://newsapi.org/v1/";
+    private static final String BASE_URL = "http://newsapi.org/v1/";
     private static Retrofit mRetrofit;
 
     // TODO: (12) Deklarasikan retrofit instance

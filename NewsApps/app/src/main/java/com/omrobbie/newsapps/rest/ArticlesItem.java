@@ -2,7 +2,7 @@ package com.omrobbie.newsapps.rest;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ArticlesItem{
+public class ArticlesItem {
 
 	@SerializedName("publishedAt")
 	private String publishedAt;

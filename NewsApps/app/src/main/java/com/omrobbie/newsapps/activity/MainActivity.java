@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.omrobbie.newsapps.BuildConfig;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapterAPI.setItemNewsClickListener(new NewsClickListener() {
             @Override
             public void onItemNewsClicked(ArticlesItem articlesItem) {
-                DetailActivity.start(MainActivity.this, articlesItem.toJson());
+                DetailActivity.start(MainActivity.this, articlesItem);
             }
         });
 
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<APIResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "API Response Call Failure!", Toast.LENGTH_SHORT).show();
+                Log.e("MainActivity", "terserah", t);
             }
         });
     }

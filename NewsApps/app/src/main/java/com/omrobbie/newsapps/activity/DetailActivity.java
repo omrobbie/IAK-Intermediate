@@ -16,9 +16,9 @@ public class DetailActivity extends AppCompatActivity {
     private static final String KEY_EXTRA_NEWS = "news";
     private ArticlesItem articlesItem;
 
-    public static void start(Context context, String newsJson) {
+    public static void start(Context context, ArticlesItem articlesItem) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(KEY_EXTRA_NEWS, newsJson);
+        intent.putExtra(KEY_EXTRA_NEWS, articlesItem);
         context.startActivity(intent);
     }
 
@@ -29,8 +29,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // TODO: (27) Tampilkan data
         if (getIntent().hasExtra(KEY_EXTRA_NEWS)) {
-            String newsJson = getIntent().getStringExtra(KEY_EXTRA_NEWS);
-            articlesItem = new ArticlesItem().fromJson(newsJson);
+            articlesItem = getIntent().getParcelableExtra(KEY_EXTRA_NEWS);
             Toast.makeText(this, articlesItem.getTitle(), Toast.LENGTH_SHORT).show();
         } else finish();
     }
