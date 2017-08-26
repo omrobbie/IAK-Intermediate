@@ -2,7 +2,10 @@ package com.omrobbie.newsapps.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +55,7 @@ public class DetailActivity extends AppCompatActivity {
         } else finish();
     }
 
+    // TODO: (29) Buatkan fungsi untuk menampilkan web view
     private void setupWebView() {
         webView.clearCache(true);
         webView.clearHistory();
@@ -66,5 +70,19 @@ public class DetailActivity extends AppCompatActivity {
                 super.onProgressChanged(view, newProgress);
             }
         });
+    }
+
+    // TODO: (30) Buatkan fungsi untuk merubah tampilan action bar
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar == null) return;
+
+        actionBar.setTitle(articlesItem.getTitle());
+        actionBar.setSubtitle(articlesItem.getUrl());
+
+        // TODO: (31) Tambahkan icon di action bar
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_action_close);
+        actionBar.setHomeAsUpIndicator(drawable);
     }
 }
