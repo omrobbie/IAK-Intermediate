@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -91,5 +92,14 @@ public class DetailActivity extends AppCompatActivity {
         // TODO: (31) Tambahkan icon di action bar
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_action_close);
         actionBar.setHomeAsUpIndicator(drawable);
+    }
+
+    // TODO: (33) Atifkan ketika tombol back/home ditekan
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
