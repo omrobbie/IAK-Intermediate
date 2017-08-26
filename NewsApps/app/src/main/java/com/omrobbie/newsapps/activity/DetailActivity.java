@@ -49,9 +49,12 @@ public class DetailActivity extends AppCompatActivity {
         if (getIntent().hasExtra(KEY_EXTRA_NEWS)) {
             articlesItem = getIntent().getParcelableExtra(KEY_EXTRA_NEWS);
             Toast.makeText(this, articlesItem.getTitle(), Toast.LENGTH_SHORT).show();
+
             setupWebView();
             webView.loadUrl(articlesItem.getUrl());
             progressBar.setMax(100);
+
+            setupActionBar();
         } else finish();
     }
 
@@ -80,6 +83,10 @@ public class DetailActivity extends AppCompatActivity {
 
         actionBar.setTitle(articlesItem.getTitle());
         actionBar.setSubtitle(articlesItem.getUrl());
+
+        // TODO: (32) Aktifkan tombol back / home
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         // TODO: (31) Tambahkan icon di action bar
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_action_close);
